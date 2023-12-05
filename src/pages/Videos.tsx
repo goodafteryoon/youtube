@@ -1,5 +1,9 @@
+import { useParams } from 'react-router-dom';
+
 const Videos = () => {
-  return <div>Videos 페이지입니다</div>;
+  const { keyword } = useParams();
+
+  return <div>{keyword ? `${keyword} 🔍` : 'All of'} Videos 페이지입니다</div>;
 };
 
 export default Videos;

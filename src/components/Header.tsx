@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { BsYoutube, BsSearch } from 'react-icons/bs';
 
 const Header = () => {
   const [text, setText] = useState('');
@@ -20,11 +21,14 @@ const Header = () => {
   return (
     <header>
       <Link to='/'>
-        <h1>🎥 Youtube</h1>
+        <BsYoutube />
+        <h1 className='text-3xl'>Youtube</h1>
       </Link>
       <form onSubmit={handleSubmit}>
         <input type='text' onChange={handleChange} value={text} />
-        <button>🔍</button>
+        <button>
+          <BsSearch />
+        </button>
       </form>
     </header>
   );

@@ -1,8 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
+
 import { Item } from '../models/video/popular';
 import VideoCard from '../components/VideoCard';
-import { search } from '../api/youtube';
+import FakeYoutube from '../api/fakeYoutube';
 
 const Videos = () => {
   const { keyword } = useParams();
@@ -11,7 +12,10 @@ const Videos = () => {
     isLoading,
     error,
     data: videos,
-  } = useQuery<Item[]>(['videos', keyword], () => search(keyword ?? ''));
+  } = useQuery<Item[]>(['videos', keyword], () => {
+    const mockDataFetch = new FakeYoutube();
+    return mockDataFetch.search(keyword);
+  });
 
   return (
     <>

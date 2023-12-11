@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 
 import { Item } from '../models/video/popular';
 import VideoCard from '../components/VideoCard';
-import FakeYoutube from '../api/fakeYoutube';
+import Youtube from '../api/youtube';
 
 const Videos = () => {
   const { keyword } = useParams();
@@ -13,8 +13,8 @@ const Videos = () => {
     error,
     data: videos,
   } = useQuery<Item[]>(['videos', keyword], () => {
-    const mockDataFetch = new FakeYoutube();
-    return mockDataFetch.search(keyword);
+    const youtubeData = new Youtube();
+    return youtubeData.search(keyword);
   });
 
   return (

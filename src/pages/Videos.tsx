@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { Item } from '../models/video/popular';
 import VideoCard from '../components/VideoCard';
+import axios from 'axios';
 
 const Videos = () => {
   const { keyword } = useParams();
@@ -11,13 +12,10 @@ const Videos = () => {
     error,
     data: videos,
   } = useQuery<Item[]>(['videos', keyword], async () => {
-    return fetch(`/videos/${keyword ? 'search' : 'popular'}.json`)
-      .then((res) => res.json())
-      .then((data) => data.items);
+    return axios
+      .get(`/videos/${keyword ? 'search' : 'popular'}.json`)
+      .then((res) => res.data.items);
   });
-
-  console.log(videos);
-  console.log(Array.isArray(videos));
 
   return (
     <>

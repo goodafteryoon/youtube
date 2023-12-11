@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { Item } from '../models/video/popular';
 import VideoCard from '../components/VideoCard';
-import axios from 'axios';
+import { search } from '../api/youtube';
 
 const Videos = () => {
   const { keyword } = useParams();
@@ -11,11 +11,7 @@ const Videos = () => {
     isLoading,
     error,
     data: videos,
-  } = useQuery<Item[]>(['videos', keyword], async () => {
-    return axios
-      .get(`/videos/${keyword ? 'search' : 'popular'}.json`)
-      .then((res) => res.data.items);
-  });
+  } = useQuery<Item[]>(['videos', keyword], () => search(keyword ?? ''));
 
   return (
     <>

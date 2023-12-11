@@ -25,10 +25,7 @@ export default class Youtube {
           q: keyword,
         },
       })
-      .then((res) => {
-        console.log(res);
-        return res.data.items;
-      })
+      .then((res) => res.data.items)
       .then((items) =>
         items.map((item: Item) => ({ ...item, id: item.id.videoId }))
       );
@@ -40,6 +37,7 @@ export default class Youtube {
         part: 'snippet',
         maxResults: 25,
         chart: 'mostPopular',
+        regionCode: 'KR',
       },
     }).then((res) => res.data.items);
   }

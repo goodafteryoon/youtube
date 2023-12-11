@@ -3,19 +3,17 @@ import { useQuery } from 'react-query';
 
 import { Item } from '../models/video/popular';
 import VideoCard from '../components/VideoCard';
-import Youtube from '../api/youtube';
+import { useYoutubeApi } from '../context/YoutubeApiContext';
 
 const Videos = () => {
   const { keyword } = useParams();
+  const { youtube } = useYoutubeApi();
 
   const {
     isLoading,
     error,
     data: videos,
-  } = useQuery<Item[]>(['videos', keyword], () => {
-    const youtubeData = new Youtube();
-    return youtubeData.search(keyword);
-  });
+  } = useQuery<Item[]>(['videos', keyword], () => youtube.search(keyword));
 
   return (
     <>

@@ -13,8 +13,10 @@ const ChannelPlaylist = ({ channelId }: ChannelPlaylistProps) => {
     isLoading,
     error,
     data: videos,
-  } = useQuery<Item[]>(['playlist', channelId], () =>
-    youtube.searchByChannelId(channelId)
+  } = useQuery<Item[]>(
+    ['playlist', channelId],
+    () => youtube.searchByChannelId(channelId),
+    { staleTime: 1000 * 60 * 5 }
   );
 
   return (

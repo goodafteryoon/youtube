@@ -13,7 +13,9 @@ const Videos = () => {
     isLoading,
     error,
     data: videos,
-  } = useQuery<Item[]>(['videos', keyword], () => youtube.search(keyword));
+  } = useQuery<Item[]>(['videos', keyword], () => youtube.search(keyword), {
+    staleTime: 1000 * 60 * 1,
+  });
 
   return (
     <>

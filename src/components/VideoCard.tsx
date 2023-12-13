@@ -25,7 +25,7 @@ const VideoCard = ({ video, type }: VideoCardProps) => {
         src={thumbnails.medium.url}
         alt={title}
       />
-      <div>
+      <div role='document' aria-aria-aria-label='information about the video'>
         <p className='font-semibold my-2 line-clamp-2'>{title}</p>
         <p className='text-sm opacity-80'>{channelTitle}</p>
         <p className='text-sm opacity-80'>{formatAgo(publishedAt, 'ko')}</p>

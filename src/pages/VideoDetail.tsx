@@ -14,7 +14,7 @@ const VideoDetail = () => {
   const { title, channelId, channelTitle, description } = video.snippet;
 
   return (
-    <section className='flex flex-col lg:flex-low'>
+    <section className='flex flex-col lg:flex-low' aria-label='detailed video'>
       <article className='basis-4/6'>
         <iframe
           id='player'
@@ -29,7 +29,7 @@ const VideoDetail = () => {
           <pre className='whitespace-pre-wrap'>{description}</pre>
         </div>
       </article>
-      <section className='basis-2/6'>
+      <section className='basis-2/6' aria-label='related channel playlist'>
         <ChannelPlaylist channelId={channelId} />
       </section>
     </section>

@@ -20,8 +20,11 @@ const Header = () => {
   useEffect(() => setText(keyword ? keyword : ''), [keyword]);
 
   return (
-    <header className='w-full flex p-4 text-2xl border-b border-zinc-600 mb-4'>
-      <Link to='/' className='flex items-center'>
+    <header
+      className='w-full flex p-4 text-2xl border-b border-zinc-600 mb-4'
+      aria-label='header for searching videos'
+    >
+      <Link to='/' className='flex items-center' aria-label='move to Home'>
         <BsYoutube className='text-4xl text-brand' />
         <h1 className='font-bold ml-2 text-3xl'>Youtube</h1>
       </Link>
@@ -32,8 +35,9 @@ const Header = () => {
           onChange={handleChange}
           value={text}
           placeholder='Search...'
+          aria-label='Keywords you want to search '
         />
-        <button className='bg-zinc-600 px-4'>
+        <button className='bg-zinc-600 px-4' aria-label='search'>
           <BsSearch />
         </button>
       </form>

@@ -1,4 +1,5 @@
 import { useQuery } from 'react-query';
+
 import { useYoutubeApi } from '../context/YoutubeApiContext';
 
 interface ChannelInfoProps {

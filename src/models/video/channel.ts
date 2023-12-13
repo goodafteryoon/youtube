@@ -1,10 +1,8 @@
-export interface Search {
+export interface Channel {
   kind: string;
   etag: string;
-  items: Item[];
-  nextPageToken: string;
   pageInfo: PageInfo;
-  regionCode: string;
+  items: Item[];
 }
 
 export interface PageInfo {
@@ -15,32 +13,24 @@ export interface PageInfo {
 export interface Item {
   kind: string;
   etag: string;
-  id: Id;
+  id: string;
   snippet: Snippet;
 }
 
-export interface Id {
-  kind: string;
-  videoId: string;
-}
-
 export interface Snippet {
-  publishedAt: string;
-  channelId: string;
   title: string;
   description: string;
+  customUrl: string;
+  publishedAt: string;
   thumbnails: Thumbnails;
-  channelTitle: string;
-  liveBroadcastContent?: string;
-  publishTime?: string;
+  localized: Localized;
+  country: string;
 }
 
 export interface Thumbnails {
   default: Default;
   medium: Medium;
   high: High;
-  maxres?: Default;
-  standard?: Default;
 }
 
 export interface Default {
@@ -59,4 +49,9 @@ export interface High {
   url: string;
   width: number;
   height: number;
+}
+
+export interface Localized {
+  title: string;
+  description: string;
 }

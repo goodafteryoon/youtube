@@ -1,6 +1,11 @@
 import axios, { AxiosInstance } from 'axios';
 
-import { SearchParams, VideoParams } from '../types/apiTypes';
+import {
+  ChannelImageURLParams,
+  SearchByChannelIdParams,
+  SearchParams,
+  VideoParams,
+} from '../types/apiTypes';
 
 export default class YoutubeClient {
   private httpClient: AxiosInstance;
@@ -18,5 +23,13 @@ export default class YoutubeClient {
 
   async videos(params: VideoParams) {
     return this.httpClient.get('videos', params);
+  }
+
+  async channels(params: ChannelImageURLParams) {
+    return this.httpClient.get('channels', params);
+  }
+
+  async playlist(params: SearchByChannelIdParams) {
+    return this.httpClient.get('playlists', params);
   }
 }

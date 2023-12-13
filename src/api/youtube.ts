@@ -1,14 +1,11 @@
-import axios, { AxiosInstance } from 'axios';
 import { Item } from '../models/video/search';
+import { ApiClient } from '../types/apiTypes';
 
 export default class Youtube {
-  private httpClient: AxiosInstance;
+  private apiClient: ApiClient;
 
-  constructor() {
-    this.httpClient = axios.create({
-      baseURL: 'https://www.googleapis.com/youtube/v3',
-      params: { key: import.meta.env.VITE_YOUTUBE_API_KEY },
-    });
+  constructor(apiClient: ApiClient) {
+    this.apiClient = apiClient;
   }
 
   async search(keyword?: string) {
@@ -16,8 +13,8 @@ export default class Youtube {
   }
 
   async #searchByKeyword(keyword: string) {
-    return this.httpClient
-      .get('search', {
+    return this.apiClient
+      .search({
         params: {
           part: 'snippet',
           maxResults: 25,
@@ -26,19 +23,21 @@ export default class Youtube {
         },
       })
       .then((res) => res.data.items)
-      .then((items) =>
-        items.map((item: Item) => ({ ...item, id: item.id.videoId }))
+      .then((items: Item[]) =>
+        items.map((item) => ({ ...item, id: item.id.videoId }))
       );
   }
 
   async #mostPopular() {
-    return this.httpClient('videos', {
-      params: {
-        part: 'snippet',
-        maxResults: 25,
-        chart: 'mostPopular',
-        regionCode: 'KR',
-      },
-    }).then((res) => res.data.items);
+    return this.apiClient
+      .videos({
+        params: {
+          part: 'snippet',
+          maxResults: 25,
+          chart: 'mostPopular',
+          regionCode: 'KR',
+        },
+      })
+      .then((res) => res.data.items);
   }
 }
